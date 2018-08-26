@@ -1,0 +1,10 @@
+..\Output\mqttpacket.o: ..\APP\MQTTClient\MQTTPacket.c
+..\Output\mqttpacket.o: ..\APP\MQTTClient\StackTrace.h
+..\Output\mqttpacket.o: ..\APP\MQTTClient\MQTTPacket.h
+..\Output\mqttpacket.o: ..\APP\MQTTClient\MQTTConnect.h
+..\Output\mqttpacket.o: ..\APP\MQTTClient\MQTTPublish.h
+..\Output\mqttpacket.o: ..\APP\MQTTClient\MQTTSubscribe.h
+..\Output\mqttpacket.o: ..\APP\MQTTClient\MQTTUnsubscribe.h
+..\Output\mqttpacket.o: ..\APP\MQTTClient\MQTTFormat.h
+..\Output\mqttpacket.o: ..\APP\MQTTClient\MQTTPacket.h
+..\Output\mqttpacket.o: d:\Keil\ARM\ARMCC\bin\..\include\string.h

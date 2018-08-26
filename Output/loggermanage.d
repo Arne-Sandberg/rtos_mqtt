@@ -1,0 +1,17 @@
+..\Output\loggermanage.o: ..\APP\loggerManage.c
+..\Output\loggermanage.o: ..\FreeRTOS\include\FreeRTOS.h
+..\Output\loggermanage.o: d:\Keil\ARM\ARMCC\bin\..\include\stddef.h
+..\Output\loggermanage.o: d:\Keil\ARM\ARMCC\bin\..\include\stdint.h
+..\Output\loggermanage.o: ..\BSP\FreeRTOSConfig.h
+..\Output\loggermanage.o: ..\FreeRTOS\include\projdefs.h
+..\Output\loggermanage.o: ..\FreeRTOS\include\portable.h
+..\Output\loggermanage.o: ..\FreeRTOS\include\deprecated_definitions.h
+..\Output\loggermanage.o: ..\FreeRTOS\portable\RVDS\ARM_CM3\portmacro.h
+..\Output\loggermanage.o: ..\FreeRTOS\include\mpu_wrappers.h
+..\Output\loggermanage.o: ..\FreeRTOS\include\timers.h
+..\Output\loggermanage.o: ..\FreeRTOS\include\task.h
+..\Output\loggermanage.o: ..\FreeRTOS\include\list.h
+..\Output\loggermanage.o: d:\Keil\ARM\ARMCC\bin\..\include\stdio.h
+..\Output\loggermanage.o: d:\Keil\ARM\ARMCC\bin\..\include\stdlib.h
+..\Output\loggermanage.o: d:\Keil\ARM\ARMCC\bin\..\include\string.h
+..\Output\loggermanage.o: ..\APP\loggerManage.h

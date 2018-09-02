@@ -4,6 +4,9 @@
 
 #include "FreeRTOS.h"
 #include "task.h"
+#include "common.h"
+#include "timers.h"
+
 #include "queue.h"
 #include "semphr.h"
 #include "utils.h"
@@ -12,10 +15,14 @@
 #include "dprintf.h"
 #include "i2c_slave.h"
 #include "loggerManage.h"
+#include "watchdog.h"
 
 extern void mqttTaskCreate(void);
 extern void configTaskCreate(void);
 extern void collectTaskCreate(void);
+
+
+
 #if 0
 void GPIO_Configuration(void)
 {
@@ -334,10 +341,20 @@ static void System_Init_task(void* pvParameters)
 
 
 
+TimerHandle_t wdgTimerHandle;
+
+static void wdgTimerCallback(xTimerHandle pxTimer)
+{
+    IWDG_Feed();
+
+}
 
 
 int main(void)
 {  
+
+	const TickType_t  xTimerPer = 100;	//tick = 1ms,100ms 每100ms 喂狗
+
 	__set_PRIMASK(1);//��ֹȫ���ж�
 	//prvSetupHardware();	
 	System_Setup();
@@ -346,17 +363,57 @@ int main(void)
 	printf("#\r\n");
 	printf("###############################################\r\n");
 	printf("##    eIOT gateway--welcome to eIoT          ##\r\n");
-	printf("##    version : 0.1.8                        ##\r\n");
+	printf("##    version : 1.0.1                        ##\r\n");
 	printf("###############################################\r\n");
 
 	printf("\r\n\r\n");
 	
+	  /* 检查是否为独立看门狗复位 */
+	if (RCC_GetFlagStatus(RCC_FLAG_IWDGRST) != RESET)
+	{
+	  /* 独立看门狗复位 */
+  	  printf("reset by watchdog!\r\n");
+	
+	  /* 清除标志 */
+	  RCC_ClearFlag();
+	}
+
+
+	/*start report peroid timer*/
+
+	
+	wdgTimerHandle = xTimerCreate("wdg",		   /* 定时器名字 */
+							   xTimerPer,	 /* 定时器周期,单位时钟节拍 */
+							   pdTRUE,			/* 周期性 */
+							   ( void * ) 0,
+							   wdgTimerCallback); /* 定时器回调函数 */
+
+	if(wdgTimerHandle == NULL)
+	{
+		/* 没有创建成功，用户可以在这里加入创建失败的处理机制 */
+	   printf("watchdog timer fail!!\r\n");
+	}
+	else
+	{
+		 /* 启动定时器，系统启动后才开始工作 */
+		 if(xTimerStart(wdgTimerHandle, 10) != pdPASS)//等待延时100ms
+		 	{
+			 /* 定时器还没有进入激活状态 */
+		 	}
+	 }
+	
+
+
 	//SD_Init(); 
 	
 	//InitMQTTServerInfo();
 	config_Recover();
 	
 	xTaskCreate(System_Init_task,"vTaskSystemInit",100,NULL,SYSTEM_INIT_TASK_PRIO,&xHandleTaskSystemInit);
+
+	
+    // IWDG 4s 超时溢出
+    IWDG_Config(IWDG_Prescaler_256 ,625); 	//4S WATCHDOG
 	
 	vTaskStartScheduler();//�������������
 }

@@ -39,6 +39,8 @@
 ..\Output\main.o: ..\FreeRTOS\include\mpu_wrappers.h
 ..\Output\main.o: ..\FreeRTOS\include\task.h
 ..\Output\main.o: ..\FreeRTOS\include\list.h
+..\Output\main.o: ..\BSP\common.h
+..\Output\main.o: ..\FreeRTOS\include\timers.h
 ..\Output\main.o: ..\FreeRTOS\include\queue.h
 ..\Output\main.o: ..\FreeRTOS\include\semphr.h
 ..\Output\main.o: ..\BSP\utils.h
@@ -48,12 +50,12 @@
 ..\Output\main.o: d:\Keil\ARM\ARMCC\bin\..\include\stdio.h
 ..\Output\main.o: ..\I2C\i2c_slave.h
 ..\Output\main.o: ..\APP\loggerManage.h
+..\Output\main.o: ..\APP\watchdog.h
 ..\Output\main.o: ..\BSP\serial.h
 ..\Output\main.o: ..\third_party\FatFS\source\integer.h
 ..\Output\main.o: ..\third_party\FatFS\source\diskio.h
 ..\Output\main.o: ..\third_party\FatFS\source\ff.h
 ..\Output\main.o: ..\third_party\FatFS\source\ffconf.h
 ..\Output\main.o: ..\BSP\sdcard.h
-..\Output\main.o: ..\BSP\common.h
 ..\Output\main.o: ..\BSP\netconf.h
 ..\Output\main.o: ..\STM32_ETH_Driver\inc\stm32_eth.h

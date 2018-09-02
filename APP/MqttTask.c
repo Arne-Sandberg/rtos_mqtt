@@ -42,7 +42,7 @@ static MQTTClient client = DefaultClient;
 u16 g_reportPacketStat = 0;
 
 
-#define TIMER_REPORT_ID 0
+
 
 #define PUB_MSG_LEN 16
 

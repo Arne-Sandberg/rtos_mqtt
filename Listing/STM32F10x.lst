@@ -554,8 +554,8 @@ ARM Macro Assembler    Page 9
               00000000 
 Command Line: --debug --xref --cpu=Cortex-M3 --apcs=interwork --depend=..\Outpu
 t\STM32F10x.d -o..\Output\STM32F10x.o -Id:\Keil\ARM\RV31\INC -Id:\Keil\ARM\CMSI
-S\Include -Id:\Keil\ARM\Inc\ST\STM32F10x --predefine="__EVAL SETA 1" --predefin
-e="__MICROLIB SETA 1" --list=..\Listing\STM32F10x.lst ..\BSP\STM32F10x.s
+S\Include -Id:\Keil\ARM\Inc\ST\STM32F10x --predefine="__MICROLIB SETA 1" --list
+=..\Listing\STM32F10x.lst ..\BSP\STM32F10x.s
 
 
 
@@ -1469,4 +1469,4 @@ Symbol: xPortSysTickHandler
       At line 68 in file ..\BSP\STM32F10x.s
 Comment: xPortSysTickHandler used once
 6 symbols
-426 symbols in table
+425 symbols in table

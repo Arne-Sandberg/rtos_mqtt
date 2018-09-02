@@ -4,6 +4,10 @@
 #define FI 1
 #define DI 2
 
+#define TIMER_REPORT_ID 0
+#define TIMER_WATHDOG_ID 1
+
+
 void Sys_Soft_Reset(void);
 void get_file_name(uint8_t *file_name,uint8_t length,uint8_t type);
 uint8_t check_file_name(uint8_t *file_name,uint8_t length);

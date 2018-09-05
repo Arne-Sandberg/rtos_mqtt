@@ -404,7 +404,11 @@ void  mqtt_reportCb(MQTTClient * client)
 
 	sprintf(buf+length,"type:0,");
 	length = strlen(buf);
-
+	if(app_getErrorReason() != REBOOT_INVALID)
+	{
+		sprintf(buf+length,"reboot:%d,",app_getErrorReason());
+		length = strlen(buf);
+	}
 	sprintf(buf+length,"version:%d}",config_getVersion());
 	length = strlen(buf);	
 

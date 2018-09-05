@@ -349,6 +349,18 @@ static void wdgTimerCallback(xTimerHandle pxTimer)
 
 }
 
+unsigned char g_errorReason = 0;
+
+void app_setErrorReason(unsigned char reason)
+{
+	g_errorReason = reason;
+}
+
+
+unsigned char app_getErrorReason()
+{
+	return g_errorReason;
+}
 
 int main(void)
 {  
@@ -373,6 +385,9 @@ int main(void)
 	{
 	  /* 独立看门狗复位 */
   	  printf("reset by watchdog!\r\n");
+
+	  app_setErrorReason(REBOOT_BY_WATCHDOG);
+	  save_rebootReason(REBOOT_BY_CLI);	
 	
 	  /* 清除标志 */
 	  RCC_ClearFlag();

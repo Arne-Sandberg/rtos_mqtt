@@ -25,8 +25,6 @@ enum configAction
 	CONF_MQTT_SERVER,
 	CONF_MQTT_PORT,	
 	CONF_MQTT_REBOOT,
-	CONF_I2C_READ,
-	CONF_I2C_WRITE,
 };
 
 //需要4字节对齐
@@ -37,6 +35,7 @@ typedef struct
 	unsigned long  mqtt_server_port;
 	unsigned char mac[6];
 	unsigned int version;
+	unsigned long bootReason;
 	
 }  Config_data;                       
 

@@ -1,15 +1,15 @@
-
+#include "stm32f10x.h"
 #include "FreeRTOS.h"
 #include "task.h"
 #include "queue.h"
 //#include "MQTTClient.h"
 #include <stdio.h>
 #include <stdlib.h>
-
+#include "common.h"
 #include "serial.h"
 #include <string.h>
 
-#include "stm32f10x.h"
+
 
 #include "configApp.h"
 #include "utils.h"
@@ -95,54 +95,6 @@ void Read_Flash(u32 *buff, u8 len)
     }
 } 
 
-void config_gpio	(char item, char * string)
-{
-	u32 t,i;
-	unsigned char buf[4]={0xa5,0xa5,1,1};
-
-	if(item == CONF_I2C_READ)
-	{
-		slave_i2c_init();
-#if 0
-		while (1)
-		{
-				if(simI2c_read(0,buf,1))
-				{
-					printf("%d",buf[0]);
-				}
-				else
-				{
-					vTaskDelay(10);
-				}
-		}
-#endif		
-	}
-	if(item == CONF_I2C_WRITE)
-	{
-		simI2c_master_init();
-
-		t = atoi(string);
-		
-		if(t == 1)
-		{
-			SDA_HIGH;
-			SCL_HIGH;
-			return;
-		}
-
-		if(t == 0)
-		{
-			SDA_LOW;
-			SCL_LOW;
-			return;
-		}
-		
-		for(i=0; i<1000; i++)
-			simI2c_write(0x5a,buf,2);//strlen(string)
-			vTaskDelay(100);
-	}
-		
-}
 
 void config_mqtt	(char item,char * string)
 {
@@ -178,6 +130,27 @@ void config_mqtt	(char item,char * string)
 	}
 
 
+	return;
+}
+
+
+
+void config_mac(char * macStr)
+{
+
+	Config_data data;
+
+	
+	//read the old config
+	Read_Flash((u32 *)&data,sizeof(Config_data)/sizeof(u32));	
+	
+	UTILS_StrToMac(macStr,data.mac);
+
+	
+	if(1 != Write_Flash((u32 *)&data,sizeof(Config_data)/sizeof(u32)))
+	{
+		printf("save mac error\r\n");
+	}	
 	return;
 }
 
@@ -282,14 +255,12 @@ void config_command(char * cmdStr,signed char len)
 				{
 					action = CONF_MQTT_REBOOT;
 				}
-				if(0 == strcmp((char *)words,"i2c-read"))
+				
+				if(0 == strcmp((char *)words,"mac"))
 				{
-					action = CONF_I2C_READ;
-				}				
-				if(0 == strcmp((char *)words,"i2c-write"))
-				{
-					action = CONF_I2C_WRITE;
-				}					
+					action = CONF_MAC;
+				}
+
 				if(action == CONF_INVALID)
 				{
 					printf("invalid command!\r\n");
@@ -322,13 +293,13 @@ void config_command(char * cmdStr,signed char len)
 		case CONF_MQTT_PORT:
 			config_mqtt(CONF_MQTT_PORT,words);
 			break;	
-		case CONF_I2C_READ:
-			config_gpio(CONF_I2C_READ,words);
+		case CONF_MAC:
+			config_mac(words);
 			break;	
-		case CONF_I2C_WRITE:
-			config_gpio(CONF_I2C_WRITE,words);
-			break;		
+
 		case CONF_MQTT_REBOOT:
+			save_rebootReason(REBOOT_BY_CLI);			
+			delay(1000);
 			NVIC_SystemReset();
 			break;		
 		default:  //invalid
@@ -408,14 +379,18 @@ void 	config_Recover(void)
 	{
 		pCfg->mqtt_server_port = 1883;
 	}
-	// mac is fix to be modify
-	pCfg->mac[0] = 0x00;
-	pCfg->mac[1] = 0xe0;
-	pCfg->mac[2] = 0xfc;
-	pCfg->mac[3] = 0x18;
-	pCfg->mac[4] = 0x66;
-	pCfg->mac[5] = 0x99;
-
+	// if no mac, use default
+	if(pCfg->mac[0] ==0 && pCfg->mac[1] ==0 && pCfg->mac[2] ==0 &&pCfg->mac[3] ==0 && pCfg->mac[4] ==0 && pCfg->mac[5] ==0)
+	{
+		pCfg->mac[0] = 0x00;
+		pCfg->mac[1] = 0xe0;
+		pCfg->mac[2] = 0xfc;
+		pCfg->mac[3] = 0x18;
+		pCfg->mac[4] = 0x66;
+		pCfg->mac[5] = 0x99;
+	}
+	//恢复上次启动原因
+	app_setErrorReason((unsigned char) config.bootReason);
 }
 
 u16 config_getVersion(void)
@@ -449,7 +424,25 @@ u32 config_getMqttServerPort(void)
 	return config.mqtt_server_port;
 }
 
+void save_rebootReason(unsigned int reason)
+{
 
+	Config_data data;
+	
+	//read the old config
+	Read_Flash((u32 *)&data,sizeof(Config_data)/sizeof(u32));	
+
+	data.bootReason = reason;
+	
+	if(1 != Write_Flash((u32 *)&data,sizeof(Config_data)/sizeof(u32)))
+	{
+		printf("save reason error\r\n");
+	}
+
+
+	return;
+
+}
 
 void configTaskCreate(void)
 {

@@ -14,5 +14,6 @@ extern const char *getCurrentFileName(const char* strFileName);
 extern unsigned char  UTILS_IsIPV4 (char *str);
 extern unsigned char  UTILS_StrToIP(char* str, void *ip);
 extern unsigned long  UTILS_Atoh(const char *s);
+extern void UTILS_StrToMac(const char * szMac,unsigned char * pMac);  
 
 #endif

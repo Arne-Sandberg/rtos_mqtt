@@ -7,6 +7,17 @@
 #define TIMER_REPORT_ID 0
 #define TIMER_WATHDOG_ID 1
 
+typedef enum
+{
+    REBOOT_INVALID, 
+	REBOOT_BY_POWER,	
+	REBOOT_BY_CLI,
+	REBOOT_BY_HARDWARE,		
+	REBOOT_BY_WATCHDOG,
+	REBOOT_UNKNOW,	
+}APP_REBOOT_REASON;
+
+
 
 void Sys_Soft_Reset(void);
 void get_file_name(uint8_t *file_name,uint8_t length,uint8_t type);
@@ -27,6 +38,9 @@ extern const char * getMQTTServerIP(void);
 extern int getMQTTServerPort(void);
 extern char * getMQTTServerName(void);
 extern char * getMQTTServerPassword(void);
-
+extern void app_setErrorReason(unsigned char reason);
+extern unsigned char app_getErrorReason(void);
+extern void save_rebootReason(unsigned int reason);
+extern  void delay(int i);
 #endif
 

@@ -1,9 +1,0 @@
-..\Output\netifapi.o: ..\third_party\lwip-1.4.1\src\api\netifapi.c
-..\Output\netifapi.o: ..\third_party\lwip-1.4.1\src\include\lwip/opt.h
-..\Output\netifapi.o: ..\BSP\lwipopts.h
-..\Output\netifapi.o: ..\third_party\lwip-1.4.1\src\include\lwip/debug.h
-..\Output\netifapi.o: ..\third_party\lwip-1.4.1\src\include\lwip/arch.h
-..\Output\netifapi.o: ..\third_party\lwip-1.4.1\src\include\arch/cc.h
-..\Output\netifapi.o: ..\third_party\lwip-1.4.1\src\include\arch/cpu.h
-..\Output\netifapi.o: ..\third_party\lwip-1.4.1\src\include\lwip/opt.h
-..\Output\netifapi.o: d:\Keil\ARM\ARMCC\bin\..\include\stdio.h

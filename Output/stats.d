@@ -1,9 +1,0 @@
-..\Output\stats.o: ..\third_party\lwip-1.4.1\src\core\stats.c
-..\Output\stats.o: ..\third_party\lwip-1.4.1\src\include\lwip/opt.h
-..\Output\stats.o: ..\BSP\lwipopts.h
-..\Output\stats.o: ..\third_party\lwip-1.4.1\src\include\lwip/debug.h
-..\Output\stats.o: ..\third_party\lwip-1.4.1\src\include\lwip/arch.h
-..\Output\stats.o: ..\third_party\lwip-1.4.1\src\include\arch/cc.h
-..\Output\stats.o: ..\third_party\lwip-1.4.1\src\include\arch/cpu.h
-..\Output\stats.o: ..\third_party\lwip-1.4.1\src\include\lwip/opt.h
-..\Output\stats.o: d:\Keil\ARM\ARMCC\bin\..\include\stdio.h

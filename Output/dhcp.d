@@ -1,9 +1,0 @@
-..\Output\dhcp.o: ..\third_party\lwip-1.4.1\src\core\dhcp.c
-..\Output\dhcp.o: ..\third_party\lwip-1.4.1\src\include\lwip/opt.h
-..\Output\dhcp.o: ..\BSP\lwipopts.h
-..\Output\dhcp.o: ..\third_party\lwip-1.4.1\src\include\lwip/debug.h
-..\Output\dhcp.o: ..\third_party\lwip-1.4.1\src\include\lwip/arch.h
-..\Output\dhcp.o: ..\third_party\lwip-1.4.1\src\include\arch/cc.h
-..\Output\dhcp.o: ..\third_party\lwip-1.4.1\src\include\arch/cpu.h
-..\Output\dhcp.o: ..\third_party\lwip-1.4.1\src\include\lwip/opt.h
-..\Output\dhcp.o: d:\Keil\ARM\ARMCC\bin\..\include\stdio.h

@@ -1,9 +1,0 @@
-..\Output\autoip.o: ..\third_party\lwip-1.4.1\src\core\ipv4\autoip.c
-..\Output\autoip.o: ..\third_party\lwip-1.4.1\src\include\lwip/opt.h
-..\Output\autoip.o: ..\BSP\lwipopts.h
-..\Output\autoip.o: ..\third_party\lwip-1.4.1\src\include\lwip/debug.h
-..\Output\autoip.o: ..\third_party\lwip-1.4.1\src\include\lwip/arch.h
-..\Output\autoip.o: ..\third_party\lwip-1.4.1\src\include\arch/cc.h
-..\Output\autoip.o: ..\third_party\lwip-1.4.1\src\include\arch/cpu.h
-..\Output\autoip.o: ..\third_party\lwip-1.4.1\src\include\lwip/opt.h
-..\Output\autoip.o: d:\Keil\ARM\ARMCC\bin\..\include\stdio.h
